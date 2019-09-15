@@ -1,20 +1,19 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import RecipeSection from '../components/recipeSection/recipeSection';
+import AboutAppSlider from '../components/aboutAppSlider/aboutAppSlider';
+import FeedbackSection from '../components/feedbackSection/feedbackSection';
+
+import '../styles/main.scss';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <RecipeSection />
+    <AboutAppSlider />
+    <FeedbackSection />
   </Layout>
 )
 
