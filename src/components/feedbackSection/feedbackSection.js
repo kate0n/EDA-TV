@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
-import Slider from 'react-slick';
-import FeedbackCardItem from './feedbackCardItem';
-import FeedbackPopUp from './feedbackPopUp';
-import data from '../../data';
-import rightArrow from '../../images/right-arrow.svg';
-import leftArrow from '../../images/left-arrow.svg';
+import Slider from "react-slick"
+import FeedbackCardItem from "./feedbackCardItem"
+import FeedbackPopUp from "./feedbackPopUp"
+import data from "../../data"
+import rightArrow from "../../images/right-arrow.svg"
+import leftArrow from "../../images/left-arrow.svg"
 
 const settings = {
   dots: false,
@@ -13,46 +13,78 @@ const settings = {
   speed: 500,
   slidesToShow: 3,
   slidesToScroll: 1,
-  nextArrow: <img src={rightArrow} className='nextFeedback' id='nextFeedback' alt='Следующий' />,
-  prevArrow: <img src={leftArrow} className='prevFeedback' id='prevFeedback' alt='Предыдущий'/>,
-};
-
-const changeSlidesToShow = () => {
-  
+  nextArrow: (
+    <img
+      src={rightArrow}
+      className="nextFeedback"
+      id="nextFeedback"
+      alt="Следующий"
+    />
+  ),
+  prevArrow: (
+    <img
+      src={leftArrow}
+      className="prevFeedback"
+      id="prevFeedback"
+      alt="Предыдущий"
+    />
+  ),
+  responsive: [
+    {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 898,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+      },
+    },
+  ],
 }
 
-const FeedbackSlider= () => {
-  const [ visibility, setVisibility ] = useState('hidden');
-  const [ feedbackIndex, setFeedbackIndex ] = useState(0);
+const changeSlidesToShow = () => {}
 
-  const showPopUp = (index) => {
-    setFeedbackIndex(index);
-    setVisibility('visible');
-  };
+const FeedbackSlider = () => {
+  const [visibility, setVisibility] = useState("hidden")
+  const [feedbackIndex, setFeedbackIndex] = useState(0)
+
+  const showPopUp = index => {
+    setFeedbackIndex(index)
+    setVisibility("visible")
+  }
 
   const closePopUp = () => {
-    setVisibility('hidden');
-  };
+    setVisibility("hidden")
+  }
 
   return (
-    <section className='feedbacks'>
+    <section className="feedbacks">
       <Slider {...settings}>
-      {data.feedbacks.map((feedback, index) => (
-        <FeedbackCardItem
-          name={feedback.name}
-          text={feedback.text}
-          key={index}
-          from={feedback.from}
-          showPopUp={showPopUp}
-          index={index} />
-      ))}
+        {data.feedbacks.map((feedback, index) => (
+          <FeedbackCardItem
+            name={feedback.name}
+            text={feedback.text}
+            key={index}
+            from={feedback.from}
+            showPopUp={showPopUp}
+            index={index}
+          />
+        ))}
       </Slider>
-      <div className='feedback-fade'></div>
+      {/* <div className="feedback-fade"></div> */}
       <FeedbackPopUp
         visibility={visibility}
         name={data.feedbacks[feedbackIndex].name}
         text={data.feedbacks[feedbackIndex].text}
-        closePopUp={closePopUp} />
+        closePopUp={closePopUp}
+      />
     </section>
   )
 }
